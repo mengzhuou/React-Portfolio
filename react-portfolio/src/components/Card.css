@@ -1,0 +1,22 @@
+.gridStyle{
+    background-color: rgb(249, 249, 249);
+    border-radius: 25px;
+    color: black;
+}
+
+.imageItem{
+    border-radius: 25px;
+}
+
+.title{
+    margin-left: 20px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.description{
+    font-size: small;
+    color: gray;
+    margin-left: 20px;
+    padding-bottom: 20px;
+}
