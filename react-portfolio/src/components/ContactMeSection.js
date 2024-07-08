@@ -28,8 +28,8 @@ const LandingSection = () => {
       type: "",
       comment: "",
     },
-    onSubmit: (values) => {
-      submit(values);
+    onSubmit: (value) => {
+      submit(value);
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("Required"),
@@ -79,6 +79,7 @@ const LandingSection = () => {
                   name="firstName"
                   {...formik.getFieldProps("firstName")}
                 />
+                <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={formik.touched.email && formik.errors.email}>
                 <FormLabel htmlFor="email">Email Address</FormLabel>

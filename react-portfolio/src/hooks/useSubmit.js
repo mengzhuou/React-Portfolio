@@ -9,9 +9,11 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const useSubmit = () => {
   const [isLoading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
+  console.log("here")
 
-  const submit = async (url, data) => {
+  const submit = async (data) => {
     const random = Math.random();
+    console.log("anm i called")
     setLoading(true);
     try {
       await wait(2000);
