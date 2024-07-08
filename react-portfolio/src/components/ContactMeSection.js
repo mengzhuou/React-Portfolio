@@ -91,18 +91,21 @@ const LandingSection = () => {
                 />
                 <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
               </FormControl>
-              <FormControl>
+              <FormControl isInvalid={formik.touched.type && formik.errors.type}>
                 <FormLabel htmlFor="type">Type of enquiry</FormLabel>
                 <Select 
                   id="type" 
                   name="type"
+                  placeholder="Select option"
                   {...formik.getFieldProps("type")}
                 >
                   <option value="hireMe">Freelance project proposal</option>
                   <option value="openSource">Open source consultancy session</option>
                   <option value="other">Other</option>
                 </Select>
+                <FormErrorMessage>{formik.errors.type}</FormErrorMessage>
               </FormControl>
+
               <FormControl isInvalid={formik.touched.comment && formik.errors.comment}>
                 <FormLabel htmlFor="comment">Your message</FormLabel>
                 <Textarea
