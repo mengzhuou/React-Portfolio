@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -33,6 +33,28 @@ const socials = [
 ];
 
 const Header = () => {
+  const [showHeader, setShowHeader] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY.current) {
+        // Scrolling down
+        setShowHeader(false);
+      } else {
+        // Scrolling up
+        setShowHeader(true);
+      }
+      lastScrollY.current = window.scrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const handleClick = (anchor) => () => {
     const id = `${anchor}-section`;
     const element = document.getElementById(id);
@@ -50,7 +72,7 @@ const Header = () => {
       top={0}
       left={0}
       right={0}
-      translateY={0}
+      transform={showHeader ? "translateY(0)" : "translateY(-100%)"}
       transitionProperty="transform"
       transitionDuration=".3s"
       transitionTimingFunction="ease-in-out"
@@ -66,28 +88,23 @@ const Header = () => {
         >
           <nav>
             {/* Add social media links based on the `socials` data */}
-
             {socials.map((social, index) => (
-              <a 
-                key={index} 
+              <a
+                key={index}
                 href={social.url}
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
-                style={{marginRight: "25px", fontSize: "20px"}}
+                style={{ marginRight: "25px", fontSize: "20px" }}
               >
-                <FontAwesomeIcon icon={social.icon}/>
+                <FontAwesomeIcon icon={social.icon} />
               </a>
             ))}
           </nav>
           <nav>
             <HStack spacing={8}>
               {/* Add links to Projects and Contact me section */}
-              <div onClick={handleClick("projects")}>
-                Projects
-              </div>
-              <div onClick={handleClick("contactme")}>
-                Contact Me
-              </div>
+              <div onClick={handleClick("projects")}>Projects</div>
+              <div onClick={handleClick("contactme")}>Contact Me</div>
             </HStack>
           </nav>
         </HStack>
@@ -95,4 +112,5 @@ const Header = () => {
     </Box>
   );
 };
+
 export default Header;
