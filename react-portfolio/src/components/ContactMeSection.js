@@ -39,21 +39,14 @@ const LandingSection = () => {
     }),
   });
 
+
   useEffect(() => {
     if (response) {
       if (response.type === 'success') {
-        onOpen({
-          title: 'Success',
-          description: `Thank you, ${formik.values.firstName}, for your message!`,
-          status: 'success',
-        });
+        onOpen('success', `Thank you, ${formik.values.firstName}, for your message!`);
         formik.resetForm();
       } else if (response.type === 'error') {
-        onOpen({
-          title: 'Error',
-          description: response.message,
-          status: 'error',
-        });
+        onOpen('error', response.message);
       }
     }
   }, [response, onOpen, formik]);
